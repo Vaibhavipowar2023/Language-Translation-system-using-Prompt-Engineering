@@ -158,15 +158,6 @@ st.text_area("📝 Translated Text:", value=translated_text if translated_text e
 
 !ngrok config add-authtoken 2sZufWzpSOi4aSvNMxwIhdoMn9a_7CVFq11hcjV8nJ95B29Cp
 
-from pyngrok import ngrok
-# Start the ngrok tunnel for Streamlit (port 8501)
-public_url = ngrok.connect(8501)
-
-print(f"Streamlit app is running at: {public_url}")
-
-# Run the Streamlit app
-subprocess.Popen(["streamlit", "run", "app.py"])
-
 import subprocess
 
 # Install required packages
@@ -174,6 +165,14 @@ packages = ["streamlit", "pyngrok", "transformers", "sentencepiece", "nltk", "la
 for package in packages:
     subprocess.run(["pip", "install", package], check=True)
 
-!ngrok kill
+from pyngrok import ngrok
+# Start the ngrok tunnel for Streamlit (port 8501)
+public_url = ngrok.connect(8501)
 
-!ngrok http 8501
+print(f"Streamlit app is running at: {public_url}")
+
+
+# Run the Streamlit app
+subprocess.Popen(["streamlit", "run", "app.py"])
+
+
